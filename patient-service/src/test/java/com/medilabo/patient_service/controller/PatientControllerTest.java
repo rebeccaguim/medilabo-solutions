@@ -116,4 +116,14 @@ void shouldUpdatePatient() throws Exception {
             .andExpect(jsonPath("$.address").value("10 New Brookside St"))
             .andExpect(jsonPath("$.phone").value("999-888-7777"));
 }
+
+@Test
+void shouldReturnNotFoundWhenPatientDoesNotExist() throws Exception {
+    // Simulate a patient that does not exist in the database
+    when(patientService.getPatientById(999999L))
+            .thenReturn(Optional.empty());
+
+    mockMvc.perform(get("/patients/999999"))
+            .andExpect(status().isNotFound());
+}
 }
