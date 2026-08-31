@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+    <meta charset="UTF-8">
+    <title>MédiLabo Solutions</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f7fbfd;
+            color: #333;
+        }
+
+        header {
+            background-color: white;
+            padding: 20px 40px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .logo {
+            width: 220px;
+            max-width: 100%;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #d9362b;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <img src="/images/medilabo-logo.png"
+         alt="MédiLabo Solutions"
+         class="logo">
+</header>
+
+<main>
+    <h1>Patient Management</h1>
+    <p>Welcome to MédiLabo Solutions.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Birth date</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="patient : ${patients}">
+                <td th:text="${patient.firstName}"></td>
+                <td th:text="${patient.lastName}"></td>
+                <td th:text="${patient.birthDate}"></td>
+                <td th:text="${patient.gender}"></td>
+                <td th:text="${patient.address}"></td>
+                <td th:text="${patient.phone}"></td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>
