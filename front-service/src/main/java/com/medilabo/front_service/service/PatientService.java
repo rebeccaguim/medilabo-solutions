@@ -27,4 +27,12 @@ public class PatientService {
 
         return Arrays.asList(patients);
     }
+
+    public Patient createPatient(Patient patient) {
+        return restClient.post()
+                .uri("/patients")
+                .body(patient)
+                .retrieve()
+                .body(Patient.class);
+    }
 }

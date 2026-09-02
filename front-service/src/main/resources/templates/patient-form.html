@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Patient - MédiLabo Solutions</title>
+</head>
+
+<body>
+
+    <h1>Add Patient</h1>
+
+    <form th:action="@{/patients}" th:object="${patient}" method="post">
+
+        <label>First name</label>
+        <input type="text" th:field="*{firstName}">
+
+        <br><br>
+
+        <label>Last name</label>
+        <input type="text" th:field="*{lastName}">
+
+        <br><br>
+
+        <label>Birth date</label>
+        <input type="date" th:field="*{birthDate}">
+
+        <br><br>
+
+        <label>Gender</label>
+        <input type="text" th:field="*{gender}">
+
+        <br><br>
+
+        <label>Address</label>
+        <input type="text" th:field="*{address}">
+
+        <br><br>
+
+        <label>Phone</label>
+        <input type="text" th:field="*{phone}">
+
+        <br><br>
+
+        <button type="submit">Save</button>
+
+    </form>
+
+</body>
+</html>
