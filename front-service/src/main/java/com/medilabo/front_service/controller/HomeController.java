@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.medilabo.front_service.model.Patient;
@@ -31,8 +32,20 @@ public class HomeController {
     }
 
     @PostMapping("/patients")
-public String createPatient(@ModelAttribute Patient patient) {
-    patientService.createPatient(patient);
+    public String createPatient(@ModelAttribute Patient patient) {
+        patientService.createPatient(patient);
+        return "redirect:/";
+    }
+
+    @GetMapping("/patients/edit/{id}")
+    public String showEditPatientForm(@PathVariable Long id, Model model) {
+        Patient patient = patientService.getPatientById(id);
+        model.addAttribute("patient", patient);
+        return "patient-form";
+    }
+    @PostMapping("/patients/{id}")
+public String updatePatient(@PathVariable Long id, @ModelAttribute Patient patient) {
+    patientService.updatePatient(id, patient);
     return "redirect:/";
 }
 }

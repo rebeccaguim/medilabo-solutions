@@ -9,7 +9,9 @@
 
     <h1>Add Patient</h1>
 
-    <form th:action="@{/patients}" th:object="${patient}" method="post">
+    <form th:action="${patient.id == null} ? @{/patients} : @{/patients/{id}(id=${patient.id})}"
+      th:object="${patient}"
+      method="post">
 
         <label>First name</label>
         <input type="text" th:field="*{firstName}">

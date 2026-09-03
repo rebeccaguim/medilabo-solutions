@@ -2,12 +2,16 @@ package com.medilabo.front_service.model;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
 public class Patient {
 
     private Long id;
     private String firstName;
     private String lastName;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthDate;
+    
     private String gender;
     private String address;
     private String phone;

@@ -35,4 +35,18 @@ public class PatientService {
                 .retrieve()
                 .body(Patient.class);
     }
+    public Patient getPatientById(Long id) {
+    return restClient.get()
+            .uri("/patients/{id}", id)
+            .retrieve()
+            .body(Patient.class);
+}
+public Patient updatePatient(Long id, Patient patient) {
+    return restClient.put()
+            .uri("/patients/{id}", id)
+            .body(patient)
+            .retrieve()
+            .body(Patient.class);
+}
+
 }
