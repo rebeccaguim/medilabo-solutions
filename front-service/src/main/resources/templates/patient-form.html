@@ -2,16 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Patient - MédiLabo Solutions</title>
+
+    <title th:text="${patient.id == null} ? 'Add Patient - MédiLabo Solutions' : 'Edit Patient - MédiLabo Solutions'">
+        Patient - MédiLabo Solutions
+    </title>
 </head>
 
 <body>
 
-    <h1>Add Patient</h1>
+    <h1 th:text="${patient.id == null} ? 'Add Patient' : 'Edit Patient'">
+        Patient
+    </h1>
 
     <form th:action="${patient.id == null} ? @{/patients} : @{/patients/{id}(id=${patient.id})}"
-      th:object="${patient}"
-      method="post">
+          th:object="${patient}"
+          method="post">
 
         <label>First name</label>
         <input type="text" th:field="*{firstName}">
