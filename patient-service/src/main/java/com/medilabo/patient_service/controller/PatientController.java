@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.medilabo.patient_service.model.Patient;
 import com.medilabo.patient_service.service.PatientService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/patients")
 public class PatientController {
@@ -42,12 +44,15 @@ public class PatientController {
     }
 
     @PostMapping
-    public Patient createPatient(@RequestBody Patient patient) {
+    public Patient createPatient(@Valid @RequestBody Patient patient) {
         return patientService.savePatient(patient);
     }
 
     @PutMapping("/{id}")
-    public Patient updatePatient(@PathVariable Long id, @RequestBody Patient patient) {
+    public Patient updatePatient(
+            @PathVariable Long id,
+            @Valid @RequestBody Patient patient) {
+
         patient.setId(id);
         return patientService.updatePatient(patient);
     }
