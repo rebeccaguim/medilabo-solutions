@@ -52,5 +52,41 @@
 
     </form>
 
+    <div th:if="${patient.id != null}">
+        <hr>
+
+        <h2>Patient History</h2>
+
+        <div th:if="${#lists.isEmpty(notes)}">
+            <p>No notes available for this patient.</p>
+        </div>
+
+        <div th:each="note : ${notes}">
+            <p style="white-space: pre-wrap;" th:text="${note.note}"></p>
+            <hr>
+        </div>
+
+        <h2>Add Note</h2>
+
+        <form th:action="@{/patients/{id}/notes(id=${patient.id})}"
+              method="post">
+
+            <label for="noteText">Note</label>
+
+            <br><br>
+
+            <textarea id="noteText"
+                      name="noteText"
+                      rows="8"
+                      cols="80"
+                      required></textarea>
+
+            <br><br>
+
+            <button type="submit">Add note</button>
+
+        </form>
+    </div>
+
 </body>
 </html>
