@@ -14,7 +14,11 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/patients/**").authenticated()
+                        .requestMatchers(
+                                "/patients/**",
+                                "/notes/**",
+                                "/risk/**"
+                        ).authenticated()
                         .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {

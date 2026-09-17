@@ -1,5 +1,7 @@
 package com.medilabo.risk_service.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum RiskLevel {
 
     NONE("None"),
@@ -13,6 +15,7 @@ public enum RiskLevel {
         this.label = label;
     }
 
+    @JsonValue
     public String getLabel() {
         return label;
     }
