@@ -55,6 +55,15 @@
     <div th:if="${patient.id != null}">
         <hr>
 
+        <h2>Diabetes Risk Assessment</h2>
+
+        <p>
+            Risk level:
+            <strong th:text="${riskLevel}">Risk level</strong>
+        </p>
+
+        <hr>
+
         <h2>Patient History</h2>
 
         <div th:if="${#lists.isEmpty(notes)}">

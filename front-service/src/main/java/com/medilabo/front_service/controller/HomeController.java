@@ -12,16 +12,23 @@ import com.medilabo.front_service.model.Note;
 import com.medilabo.front_service.model.Patient;
 import com.medilabo.front_service.service.NoteService;
 import com.medilabo.front_service.service.PatientService;
+import com.medilabo.front_service.service.RiskService;
 
 @Controller
 public class HomeController {
 
     private final PatientService patientService;
     private final NoteService noteService;
+    private final RiskService riskService;
 
-    public HomeController(PatientService patientService, NoteService noteService) {
+    public HomeController(
+            PatientService patientService,
+            NoteService noteService,
+            RiskService riskService) {
+
         this.patientService = patientService;
         this.noteService = noteService;
+        this.riskService = riskService;
     }
 
     @GetMapping("/")
@@ -49,18 +56,24 @@ public class HomeController {
 
         model.addAttribute("patient", patient);
         model.addAttribute("notes", noteService.getNotesByPatientId(id));
+        model.addAttribute("riskLevel", riskService.getRiskByPatientId(id));
 
         return "patient-form";
     }
 
     @PostMapping("/patients/{id}")
-    public String updatePatient(@PathVariable Long id, @ModelAttribute Patient patient) {
+    public String updatePatient(
+            @PathVariable Long id,
+            @ModelAttribute Patient patient) {
+
         patientService.updatePatient(id, patient);
         return "redirect:/";
     }
 
     @PostMapping("/patients/{id}/notes")
-    public String addNote(@PathVariable Long id, @RequestParam String noteText) {
+    public String addNote(
+            @PathVariable Long id,
+            @RequestParam String noteText) {
 
         Patient patient = patientService.getPatientById(id);
 
