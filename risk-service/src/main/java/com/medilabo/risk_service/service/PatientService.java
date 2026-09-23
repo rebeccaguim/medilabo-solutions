@@ -1,5 +1,6 @@
 package com.medilabo.risk_service.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -10,9 +11,11 @@ public class PatientService {
 
     private final RestClient restClient;
 
-    public PatientService() {
+    public PatientService(
+            @Value("${patient.service.url:http://localhost:8081}") String patientServiceUrl) {
+
         this.restClient = RestClient.builder()
-                .baseUrl("http://localhost:8081")
+                .baseUrl(patientServiceUrl)
                 .build();
     }
 

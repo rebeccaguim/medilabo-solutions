@@ -64,6 +64,23 @@ services:
     depends_on:
       - mongo
 
+  risk-service:
+    build:
+      context: ./risk-service
+
+    container_name: medilabo-risk-service
+
+    environment:
+      PATIENT_SERVICE_URL: http://patient-service:8081
+      NOTE_SERVICE_URL: http://notes-service:8083
+
+    ports:
+      - "8084:8084"
+
+    depends_on:
+      - patient-service
+      - notes-service
+
 volumes:
   mysql-data:
   mongo-data:
