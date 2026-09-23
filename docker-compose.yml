@@ -21,6 +21,16 @@ services:
       timeout: 5s
       retries: 10
 
+  mongo:
+    image: mongo:8.0
+    container_name: medilabo-mongo
+
+    ports:
+      - "27018:27017"
+
+    volumes:
+      - mongo-data:/data/db
+
   patient-service:
     build:
       context: ./patient-service
@@ -39,5 +49,21 @@ services:
       mysql:
         condition: service_healthy
 
+  notes-service:
+    build:
+      context: ./notes-service
+
+    container_name: medilabo-notes-service
+
+    environment:
+      MONGO_URI: mongodb://mongo:27017/medilabo_notes
+
+    ports:
+      - "8083:8083"
+
+    depends_on:
+      - mongo
+
 volumes:
   mysql-data:
+  mongo-data:
