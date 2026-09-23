@@ -81,6 +81,26 @@ services:
       - patient-service
       - notes-service
 
+  gateway-service:
+    build:
+      context: ./gateway-service
+
+    container_name: medilabo-gateway-service
+
+    environment:
+      PATIENT_SERVICE_URL: http://patient-service:8081
+      NOTES_SERVICE_URL: http://notes-service:8083
+      RISK_SERVICE_URL: http://risk-service:8084
+      JWT_SECRET: ${JWT_SECRET}
+
+    ports:
+      - "8080:8080"
+
+    depends_on:
+      - patient-service
+      - notes-service
+      - risk-service
+
 volumes:
   mysql-data:
   mongo-data:
