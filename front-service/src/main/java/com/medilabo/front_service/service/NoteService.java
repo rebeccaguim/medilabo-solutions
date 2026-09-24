@@ -3,6 +3,7 @@ package com.medilabo.front_service.service;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -16,11 +17,14 @@ public class NoteService {
     private final RestClient restClient;
     private final JwtService jwtService;
 
-    public NoteService(JwtService jwtService) {
+    public NoteService(
+            JwtService jwtService,
+            @Value("${gateway.url:http://localhost:8080}") String gatewayUrl) {
+
         this.jwtService = jwtService;
 
         this.restClient = RestClient.builder()
-                .baseUrl("http://localhost:8080")
+                .baseUrl(gatewayUrl)
                 .build();
     }
 
