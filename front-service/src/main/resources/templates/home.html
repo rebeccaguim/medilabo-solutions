@@ -24,19 +24,76 @@
         }
 
         main {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 60px auto;
             padding: 0 20px;
-            text-align: center;
         }
 
         h1 {
             color: #d9362b;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            text-align: center;
         }
 
-        p {
+        .welcome {
             font-size: 18px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .top-actions {
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 9px 14px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .add-button {
+            background-color: #d9362b;
+            color: white;
+        }
+
+        .view-button {
+            background-color: #e8f3f8;
+            color: #235d73;
+            margin-right: 5px;
+        }
+
+        .edit-button {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #eef5f8;
+            font-weight: bold;
+        }
+
+        tbody tr:hover {
+            background-color: #f8fbfc;
+        }
+
+        .actions {
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -51,8 +108,17 @@
 
 <main>
     <h1>Patient Management</h1>
-    <p>Welcome to MédiLabo Solutions.</p>
-    <a th:href="@{/patients/add}">Add Patient</a>
+
+    <p class="welcome">
+        Welcome to MédiLabo Solutions.
+    </p>
+
+    <div class="top-actions">
+        <a th:href="@{/patients/add}"
+           class="button add-button">
+            Add Patient
+        </a>
+    </div>
 
     <table>
         <thead>
@@ -75,8 +141,15 @@
                 <td th:text="${patient.gender}"></td>
                 <td th:text="${patient.address}"></td>
                 <td th:text="${patient.phone}"></td>
-                <td>
-                    <a th:href="@{/patients/edit/{id}(id=${patient.id})}">
+
+                <td class="actions">
+                    <a th:href="@{/patients/view/{id}(id=${patient.id})}"
+                       class="button view-button">
+                        View
+                    </a>
+
+                    <a th:href="@{/patients/edit/{id}(id=${patient.id})}"
+                       class="button edit-button">
                         Edit
                     </a>
                 </td>

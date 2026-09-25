@@ -49,14 +49,24 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @GetMapping("/patients/edit/{id}")
-    public String showEditPatientForm(@PathVariable Long id, Model model) {
+    @GetMapping("/patients/view/{id}")
+    public String showPatient(@PathVariable Long id, Model model) {
 
         Patient patient = patientService.getPatientById(id);
 
         model.addAttribute("patient", patient);
         model.addAttribute("notes", noteService.getNotesByPatientId(id));
         model.addAttribute("riskLevel", riskService.getRiskByPatientId(id));
+
+        return "patient-view";
+    }
+
+    @GetMapping("/patients/edit/{id}")
+    public String showEditPatientForm(@PathVariable Long id, Model model) {
+
+        Patient patient = patientService.getPatientById(id);
+
+        model.addAttribute("patient", patient);
 
         return "patient-form";
     }
@@ -85,6 +95,6 @@ public class HomeController {
 
         noteService.createNote(note);
 
-        return "redirect:/patients/edit/" + id;
+        return "redirect:/patients/view/" + id;
     }
 }
