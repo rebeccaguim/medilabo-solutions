@@ -36,6 +36,7 @@ public class NoteService {
 
         String token = jwtService.generateToken(username);
 
+        // Get this patient's notes from notes-service through the gateway.
         Note[] notes = restClient.get()
                 .uri("/notes/patient/{patId}", patId)
                 .header("Authorization", "Bearer " + token)
@@ -53,6 +54,7 @@ public class NoteService {
 
         String token = jwtService.generateToken(username);
 
+        // Save the note in notes-service through the gateway.
         return restClient.post()
                 .uri("/notes")
                 .header("Authorization", "Bearer " + token)

@@ -21,6 +21,7 @@ public class PatientService {
 
     public Patient getPatientById(Long patientId) {
 
+        // Get patient information from patient-service.
         return restClient.get()
                 .uri("/patients/{id}", patientId)
                 .retrieve()

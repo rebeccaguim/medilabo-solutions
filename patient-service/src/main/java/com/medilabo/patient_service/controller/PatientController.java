@@ -34,6 +34,7 @@ public class PatientController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Patient> getPatientById(@PathVariable Long id) {
+        // Return 404 when the patient does not exist.
         Optional<Patient> patient = patientService.getPatientById(id);
 
         if (patient.isPresent()) {
@@ -45,6 +46,7 @@ public class PatientController {
 
     @PostMapping
     public Patient createPatient(@Valid @RequestBody Patient patient) {
+        // Validate and save the new patient.
         return patientService.savePatient(patient);
     }
 
@@ -53,6 +55,7 @@ public class PatientController {
             @PathVariable Long id,
             @Valid @RequestBody Patient patient) {
 
+        // Keep the URL ID as the ID of the patient being updated.
         patient.setId(id);
         return patientService.updatePatient(patient);
     }

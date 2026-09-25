@@ -26,6 +26,7 @@ public class AuthController {
     @PostMapping("/login")
     public String login(@RequestBody LoginRequest loginRequest) {
 
+        // Check the login details before creating a JWT.
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),

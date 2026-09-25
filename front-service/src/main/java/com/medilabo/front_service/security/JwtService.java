@@ -36,6 +36,7 @@ public class JwtService {
 
     public String generateToken(String username) {
 
+        // Add the username and token lifetime to the JWT.
         Instant now = Instant.now();
 
         JwtClaimsSet claims = JwtClaimsSet.builder()

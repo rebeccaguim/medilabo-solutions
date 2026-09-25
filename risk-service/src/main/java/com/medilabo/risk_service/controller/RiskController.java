@@ -20,6 +20,7 @@ public class RiskController {
 
     @GetMapping("/{id}")
     public RiskLevel getRisk(@PathVariable Long id) {
+        // Return the assessed risk level for this patient.
         return riskService.assessRisk(id);
     }
 }

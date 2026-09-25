@@ -26,11 +26,13 @@ public class NoteController {
 
     @GetMapping("/patient/{patId}")
     public List<Note> getNotesByPatientId(@PathVariable Long patId) {
+        // Return all notes linked to this patient.
         return noteService.getNotesByPatientId(patId);
     }
 
     @PostMapping
     public Note createNote(@Valid @RequestBody Note note) {
+        // Validate and save the new note.
         return noteService.saveNote(note);
     }
 }

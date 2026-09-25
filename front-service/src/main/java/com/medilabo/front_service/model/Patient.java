@@ -17,6 +17,7 @@ public class Patient {
     private String phone;
 
     public Patient() {
+        // Required to map JSON responses to this class.
     }
 
     public Long getId() {

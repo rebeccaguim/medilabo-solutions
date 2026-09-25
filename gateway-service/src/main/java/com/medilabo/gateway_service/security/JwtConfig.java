@@ -18,6 +18,7 @@ public class JwtConfig {
     @Bean
     public JwtDecoder jwtDecoder(@Value("${jwt.secret}") String jwtSecret) {
 
+        // Use the shared secret to check incoming JWT signatures.
         SecretKey secretKey = new SecretKeySpec(
                 jwtSecret.getBytes(StandardCharsets.UTF_8),
                 "HmacSHA256"

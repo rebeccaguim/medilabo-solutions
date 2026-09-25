@@ -36,6 +36,7 @@ public class PatientService {
 
         String token = jwtService.generateToken(username);
 
+        // Get all patients from the gateway using the user's JWT.
         Patient[] patients = restClient.get()
                 .uri("/patients")
                 .header("Authorization", "Bearer " + token)
@@ -53,6 +54,7 @@ public class PatientService {
 
         String token = jwtService.generateToken(username);
 
+        // Send the new patient to patient-service through the gateway.
         return restClient.post()
                 .uri("/patients")
                 .header("Authorization", "Bearer " + token)
@@ -69,6 +71,7 @@ public class PatientService {
 
         String token = jwtService.generateToken(username);
 
+        // Get one patient from patient-service through the gateway.
         return restClient.get()
                 .uri("/patients/{id}", id)
                 .header("Authorization", "Bearer " + token)
@@ -84,6 +87,7 @@ public class PatientService {
 
         String token = jwtService.generateToken(username);
 
+        // Send the updated patient to patient-service through the gateway.
         return restClient.put()
                 .uri("/patients/{id}", id)
                 .header("Authorization", "Bearer " + token)

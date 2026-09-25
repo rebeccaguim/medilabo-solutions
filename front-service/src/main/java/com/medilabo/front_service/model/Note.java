@@ -8,6 +8,7 @@ public class Note {
     private String note;
 
     public Note() {
+        // Required to map JSON responses to this class.
     }
 
     public Note(Long patId, String patient, String note) {

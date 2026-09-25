@@ -24,6 +24,7 @@ public class NoteService {
 
     public List<Note> getNotesByPatientId(Long patientId) {
 
+        // Get the patient's notes from notes-service.
         Note[] notes = restClient.get()
                 .uri("/notes/patient/{patId}", patientId)
                 .retrieve()

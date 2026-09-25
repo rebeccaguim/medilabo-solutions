@@ -13,6 +13,7 @@ import com.medilabo.risk_service.model.RiskLevel;
 @Service
 public class RiskService {
 
+    // These terms are used to find possible diabetes symptoms in patient notes.
     private static final List<String> TRIGGER_TERMS = List.of(
             "Hémoglobine A1C",
             "Microalbumine",
@@ -40,6 +41,7 @@ public class RiskService {
 
         int triggerCount = 0;
 
+        // Count each trigger term found in each note.
         for (Note note : notes) {
 
             String noteText = note.getNote();
@@ -60,11 +62,13 @@ public class RiskService {
         LocalDate birthDate = patient.getBirthDate();
         LocalDate currentDate = LocalDate.now();
 
+        // Calculate the patient's age in complete years.
         return Period.between(birthDate, currentDate).getYears();
     }
 
     public RiskLevel determineRiskForPatientOver30(int triggerCount) {
 
+        // For age 30+, 2-5 terms is borderline, 6-7 is danger, and 8+ is early onset.
         if (triggerCount >= 8) {
             return RiskLevel.EARLY_ONSET;
         }
@@ -82,6 +86,7 @@ public class RiskService {
 
     public RiskLevel determineRiskForMaleUnder30(int triggerCount) {
 
+        // For males under 30, 3-4 terms is danger and 5+ is early onset.
         if (triggerCount >= 5) {
             return RiskLevel.EARLY_ONSET;
         }
@@ -95,6 +100,7 @@ public class RiskService {
 
     public RiskLevel determineRiskForFemaleUnder30(int triggerCount) {
 
+        // For females under 30, 4-6 terms is danger and 7+ is early onset.
         if (triggerCount >= 7) {
             return RiskLevel.EARLY_ONSET;
         }
@@ -111,6 +117,7 @@ public class RiskService {
         int age = calculateAge(patient);
         int triggerCount = countTriggerTerms(notes);
 
+        // Choose the thresholds based on age and gender.
         if (age < 30) {
 
             if ("M".equalsIgnoreCase(patient.getGender())) {
@@ -129,6 +136,7 @@ public class RiskService {
 
     public RiskLevel assessRisk(Long patientId) {
 
+        // Load the patient's data before calculating the final risk level.
         Patient patient = patientService.getPatientById(patientId);
         List<Note> notes = noteService.getNotesByPatientId(patientId);
 

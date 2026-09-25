@@ -32,6 +32,7 @@ public class RiskService {
 
         String token = jwtService.generateToken(username);
 
+        // Get the patient's risk level from risk-service through the gateway.
         return restClient.get()
                 .uri("/risk/{id}", patientId)
                 .header("Authorization", "Bearer " + token)

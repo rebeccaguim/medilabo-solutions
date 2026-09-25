@@ -45,6 +45,7 @@ public class HomeController {
 
     @PostMapping("/patients")
     public String createPatient(@ModelAttribute Patient patient) {
+        // Save the submitted patient and return to the patient list.
         patientService.createPatient(patient);
         return "redirect:/";
     }
@@ -52,6 +53,7 @@ public class HomeController {
     @GetMapping("/patients/view/{id}")
     public String showPatient(@PathVariable Long id, Model model) {
 
+        // Load the patient's details, notes, and risk level for the page.
         Patient patient = patientService.getPatientById(id);
 
         model.addAttribute("patient", patient);
@@ -76,6 +78,7 @@ public class HomeController {
             @PathVariable Long id,
             @ModelAttribute Patient patient) {
 
+        // Save the edited patient details.
         patientService.updatePatient(id, patient);
         return "redirect:/";
     }
@@ -85,6 +88,7 @@ public class HomeController {
             @PathVariable Long id,
             @RequestParam String noteText) {
 
+        // Link the new note to the selected patient.
         Patient patient = patientService.getPatientById(id);
 
         Note note = new Note(
