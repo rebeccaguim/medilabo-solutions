@@ -9,6 +9,7 @@ import org.springframework.web.client.RestClient;
 
 import com.medilabo.risk_service.model.Note;
 
+/** Gets patient notes from notes-service. */
 @Service
 public class NoteService {
 
@@ -22,6 +23,10 @@ public class NoteService {
                 .build();
     }
 
+    /** Finds all notes for a patient.
+     * @param patientId ID of the patient
+     * @return patient's notes
+     */
     public List<Note> getNotesByPatientId(Long patientId) {
 
         // Get the patient's notes from notes-service.

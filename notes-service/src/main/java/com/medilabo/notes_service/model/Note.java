@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+/** Stores a note linked to a patient. */
 @Document(collection = "notes")
 public class Note {
 

@@ -6,6 +6,7 @@ import org.springframework.web.client.RestClient;
 
 import com.medilabo.risk_service.model.Patient;
 
+/** Gets patient details from patient-service. */
 @Service
 public class PatientService {
 
@@ -19,6 +20,10 @@ public class PatientService {
                 .build();
     }
 
+    /** Finds a patient by ID.
+     * @param patientId ID of the patient
+     * @return patient details
+     */
     public Patient getPatientById(Long patientId) {
 
         // Get patient information from patient-service.

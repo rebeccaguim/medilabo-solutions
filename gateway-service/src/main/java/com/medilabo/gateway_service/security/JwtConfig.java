@@ -12,9 +12,14 @@ import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 
+/** Configures how the gateway checks JWT signatures. */
 @Configuration
 public class JwtConfig {
 
+    /** Creates the decoder used to validate incoming JWTs.
+     * @param jwtSecret shared signing secret
+     * @return JWT decoder
+     */
     @Bean
     public JwtDecoder jwtDecoder(@Value("${jwt.secret}") String jwtSecret) {
 

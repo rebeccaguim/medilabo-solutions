@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+/** Stores the details for one patient. */
 @Entity
 @Table(name = "patient")
 public class Patient {

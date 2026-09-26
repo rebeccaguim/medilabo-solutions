@@ -17,6 +17,7 @@ import com.medilabo.patient_service.service.PatientService;
 
 import jakarta.validation.Valid;
 
+/** Handles requests to read and update patient records. */
 @RestController
 @RequestMapping("/patients")
 public class PatientController {
@@ -27,11 +28,18 @@ public class PatientController {
         this.patientService = patientService;
     }
 
+    /** Returns all patient records.
+     * @return list of patients
+     */
     @GetMapping
     public List<Patient> getAllPatients() {
         return patientService.getAllPatients();
     }
 
+    /** Finds a patient by ID.
+     * @param id patient ID
+     * @return patient details, or a not-found response
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Patient> getPatientById(@PathVariable Long id) {
         // Return 404 when the patient does not exist.
@@ -44,12 +52,21 @@ public class PatientController {
         return ResponseEntity.notFound().build();
     }
 
+    /** Validates and saves a patient.
+     * @param patient patient details
+     * @return saved patient
+     */
     @PostMapping
     public Patient createPatient(@Valid @RequestBody Patient patient) {
         // Validate and save the new patient.
         return patientService.savePatient(patient);
     }
 
+    /** Updates the patient with the given ID.
+     * @param id patient ID
+     * @param patient updated patient details
+     * @return updated patient
+     */
     @PutMapping("/{id}")
     public Patient updatePatient(
             @PathVariable Long id,

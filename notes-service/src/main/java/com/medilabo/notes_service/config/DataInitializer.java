@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.medilabo.notes_service.model.Note;
 import com.medilabo.notes_service.repository.NoteRepository;
 
+/** Adds sample notes when the MongoDB collection is empty. */
 @Component
 public class DataInitializer implements CommandLineRunner {
 
@@ -17,7 +18,10 @@ public class DataInitializer implements CommandLineRunner {
         this.noteRepository = noteRepository;
     }
 
-    @Override
+        /** Adds sample data when the application starts.
+         * @param args command-line arguments
+         */
+        @Override
     public void run(String... args) {
 
         // Insert the test data only when the collection is empty

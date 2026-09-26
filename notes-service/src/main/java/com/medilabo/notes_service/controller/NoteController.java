@@ -14,6 +14,7 @@ import com.medilabo.notes_service.service.NoteService;
 
 import jakarta.validation.Valid;
 
+/** Handles requests to read and create patient notes. */
 @RestController
 @RequestMapping("/notes")
 public class NoteController {
@@ -24,12 +25,20 @@ public class NoteController {
         this.noteService = noteService;
     }
 
+    /** Returns all notes linked to a patient.
+     * @param patId patient ID
+     * @return patient's notes
+     */
     @GetMapping("/patient/{patId}")
     public List<Note> getNotesByPatientId(@PathVariable Long patId) {
         // Return all notes linked to this patient.
         return noteService.getNotesByPatientId(patId);
     }
 
+    /** Validates and saves a note.
+     * @param note note to save
+     * @return saved note
+     */
     @PostMapping
     public Note createNote(@Valid @RequestBody Note note) {
         // Validate and save the new note.

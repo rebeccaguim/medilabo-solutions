@@ -10,6 +10,7 @@ import com.medilabo.risk_service.model.Note;
 import com.medilabo.risk_service.model.Patient;
 import com.medilabo.risk_service.model.RiskLevel;
 
+/** Calculates a patient's diabetes risk from notes, age, and gender. */
 @Service
 public class RiskService {
 
@@ -37,6 +38,10 @@ public class RiskService {
         this.noteService = noteService;
     }
 
+    /** Counts the trigger terms found in the patient's notes.
+     * @param notes notes to check
+     * @return number of matching terms
+     */
     public int countTriggerTerms(List<Note> notes) {
 
         int triggerCount = 0;
@@ -57,6 +62,10 @@ public class RiskService {
         return triggerCount;
     }
 
+    /** Calculates the patient's age in years.
+     * @param patient patient whose age is calculated
+     * @return age in complete years
+     */
     public int calculateAge(Patient patient) {
 
         LocalDate birthDate = patient.getBirthDate();
@@ -66,6 +75,10 @@ public class RiskService {
         return Period.between(birthDate, currentDate).getYears();
     }
 
+    /** Applies the risk thresholds for patients aged 30 or older.
+     * @param triggerCount number of matching terms
+     * @return assessed risk level
+     */
     public RiskLevel determineRiskForPatientOver30(int triggerCount) {
 
         // For age 30+, 2-5 terms is borderline, 6-7 is danger, and 8+ is early onset.
@@ -84,6 +97,10 @@ public class RiskService {
         return RiskLevel.NONE;
     }
 
+    /** Applies the risk thresholds for males under 30.
+     * @param triggerCount number of matching terms
+     * @return assessed risk level
+     */
     public RiskLevel determineRiskForMaleUnder30(int triggerCount) {
 
         // For males under 30, 3-4 terms is danger and 5+ is early onset.
@@ -98,6 +115,10 @@ public class RiskService {
         return RiskLevel.NONE;
     }
 
+    /** Applies the risk thresholds for females under 30.
+     * @param triggerCount number of matching terms
+     * @return assessed risk level
+     */
     public RiskLevel determineRiskForFemaleUnder30(int triggerCount) {
 
         // For females under 30, 4-6 terms is danger and 7+ is early onset.
@@ -112,6 +133,11 @@ public class RiskService {
         return RiskLevel.NONE;
     }
 
+    /** Selects a risk level using the patient's age, gender, and notes.
+     * @param patient patient being assessed
+     * @param notes patient's notes
+     * @return assessed risk level
+     */
     public RiskLevel determineRisk(Patient patient, List<Note> notes) {
 
         int age = calculateAge(patient);
@@ -134,6 +160,10 @@ public class RiskService {
         return determineRiskForPatientOver30(triggerCount);
     }
 
+    /** Loads patient data and calculates the final risk level.
+     * @param patientId ID of the patient to assess
+     * @return assessed risk level
+     */
     public RiskLevel assessRisk(Long patientId) {
 
         // Load the patient's data before calculating the final risk level.

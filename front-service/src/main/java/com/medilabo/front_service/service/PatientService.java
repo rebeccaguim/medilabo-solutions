@@ -11,6 +11,7 @@ import org.springframework.web.client.RestClient;
 import com.medilabo.front_service.model.Patient;
 import com.medilabo.front_service.security.JwtService;
 
+/** Sends patient requests to patient-service through the gateway. */
 @Service
 public class PatientService {
 
@@ -28,7 +29,10 @@ public class PatientService {
                 .build();
     }
 
-    public List<Patient> getAllPatients() {
+        /** Gets all patients.
+         * @return list of patients
+         */
+        public List<Patient> getAllPatients() {
 
         String username = SecurityContextHolder.getContext()
                 .getAuthentication()
@@ -46,7 +50,11 @@ public class PatientService {
         return Arrays.asList(patients);
     }
 
-    public Patient createPatient(Patient patient) {
+        /** Creates a patient.
+         * @param patient patient details
+         * @return saved patient
+         */
+        public Patient createPatient(Patient patient) {
 
         String username = SecurityContextHolder.getContext()
                 .getAuthentication()
@@ -63,7 +71,11 @@ public class PatientService {
                 .body(Patient.class);
     }
 
-    public Patient getPatientById(Long id) {
+        /** Gets a patient by ID.
+         * @param id patient ID
+         * @return patient details
+         */
+        public Patient getPatientById(Long id) {
 
         String username = SecurityContextHolder.getContext()
                 .getAuthentication()
@@ -79,7 +91,12 @@ public class PatientService {
                 .body(Patient.class);
     }
 
-    public Patient updatePatient(Long id, Patient patient) {
+        /** Updates a patient.
+         * @param id patient ID
+         * @param patient updated patient details
+         * @return updated patient
+         */
+        public Patient updatePatient(Long id, Patient patient) {
 
         String username = SecurityContextHolder.getContext()
                 .getAuthentication()

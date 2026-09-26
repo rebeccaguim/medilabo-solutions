@@ -14,6 +14,7 @@ import com.medilabo.front_service.service.NoteService;
 import com.medilabo.front_service.service.PatientService;
 import com.medilabo.front_service.service.RiskService;
 
+/** Shows patient pages and handles patient form actions. */
 @Controller
 public class HomeController {
 
@@ -31,6 +32,10 @@ public class HomeController {
         this.riskService = riskService;
     }
 
+    /** Shows the patient list.
+     * @param model page data
+     * @return name of the patient list page
+     */
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("patients", patientService.getAllPatients());
@@ -50,6 +55,11 @@ public class HomeController {
         return "redirect:/";
     }
 
+    /** Shows patient details, notes, and risk level.
+     * @param id patient ID
+     * @param model page data
+     * @return name of the patient details page
+     */
     @GetMapping("/patients/view/{id}")
     public String showPatient(@PathVariable Long id, Model model) {
 
@@ -83,6 +93,11 @@ public class HomeController {
         return "redirect:/";
     }
 
+    /** Adds a note to a patient.
+     * @param id patient ID
+     * @param noteText note text
+     * @return redirect to the patient details page
+     */
     @PostMapping("/patients/{id}/notes")
     public String addNote(
             @PathVariable Long id,

@@ -7,6 +7,7 @@ import org.springframework.web.client.RestClient;
 
 import com.medilabo.front_service.security.JwtService;
 
+/** Gets patient risk assessments through the gateway. */
 @Service
 public class RiskService {
 
@@ -24,7 +25,11 @@ public class RiskService {
                 .build();
     }
 
-    public String getRiskByPatientId(Long patientId) {
+        /** Gets a patient's risk level.
+         * @param patientId patient ID
+         * @return risk level
+         */
+        public String getRiskByPatientId(Long patientId) {
 
         String username = SecurityContextHolder.getContext()
                 .getAuthentication()

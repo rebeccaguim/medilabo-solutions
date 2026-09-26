@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.medilabo.front_service.dto.LoginRequest;
 import com.medilabo.front_service.security.JwtService;
 
+/** Handles user login and returns an access token. */
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -23,6 +24,10 @@ public class AuthController {
         this.jwtService = jwtService;
     }
 
+    /** Checks login details and creates a JWT.
+     * @param loginRequest submitted username and password
+     * @return signed access token
+     */
     @PostMapping("/login")
     public String login(@RequestBody LoginRequest loginRequest) {
 

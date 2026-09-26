@@ -11,6 +11,7 @@ import org.springframework.web.client.RestClient;
 import com.medilabo.front_service.model.Note;
 import com.medilabo.front_service.security.JwtService;
 
+/** Sends note requests to notes-service through the gateway. */
 @Service
 public class NoteService {
 
@@ -28,7 +29,11 @@ public class NoteService {
                 .build();
     }
 
-    public List<Note> getNotesByPatientId(Long patId) {
+        /** Gets all notes for a patient.
+         * @param patId patient ID
+         * @return patient's notes
+         */
+        public List<Note> getNotesByPatientId(Long patId) {
 
         String username = SecurityContextHolder.getContext()
                 .getAuthentication()
@@ -46,7 +51,11 @@ public class NoteService {
         return Arrays.asList(notes);
     }
 
-    public Note createNote(Note note) {
+        /** Creates a note.
+         * @param note note to save
+         * @return saved note
+         */
+        public Note createNote(Note note) {
 
         String username = SecurityContextHolder.getContext()
                 .getAuthentication()
